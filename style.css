@@ -280,7 +280,8 @@ footer ul li a:hover {
 
   /* First section adjustments */
   .firstsection {
-    flex-direction: column;
+    display:flex;
+    flex-direction: column-reverse;;
     margin: 30px 0;
   }
 
@@ -297,8 +298,7 @@ footer ul li a:hover {
   .rightsection img {
     width: 200px; /* Smaller image size */
     height: 250px;
-    display:flex;
-    flex-direction:column-reverse;
+    
   }
 
   /* Second section adjustments */
@@ -316,7 +316,11 @@ footer ul li a:hover {
     flex-direction: column;
     margin: 15px 0;
   }
-
+.thirdsection{
+  display:flex;
+  flex-direction:column-reverse;
+  margin-left:0px;
+}
   .thirdsection > div, .fourthsection > div {
     width: 90%;
     margin-bottom: 15px;
@@ -362,11 +366,7 @@ footer ul li a:hover {
     margin-left: 0px;
     display: flex;
   }
-.sectionspsright img{
-  display:flex;
-  flex-direction:column-reverse;
-  direction: inherit;
-}
+
   .sectionspsright a, .gssleft a {
     font-size: 0.9rem; /* Smaller font size for links */
   }
