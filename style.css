@@ -357,7 +357,11 @@ footer ul li a:hover {
   .sectionspsright img, .gssleft img {
     width: 300px;
     height: 250px;
-    margin-left:0px;
+    margin-left: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   .sectionspsright a, .gssleft a {
