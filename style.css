@@ -251,3 +251,123 @@ footer ul li a:hover {
   color: rgb(211, 117, 73);
   font-size: 1.2rem;
 }
+@media (max-width: 768px) {
+  /* Adjust body font size */
+  body {
+    font-size: 14px;
+  }
+
+  /* Navigation adjustments */
+  nav {
+    flex-direction: row; /* Keep nav items in a row */
+    justify-content: space-between; /* Align items to the left and right */
+    padding: 0 20px; /* Add padding for spacing */
+  }
+
+  nav ul {
+    flex-direction: row; /* Ensure nav items stay in a row */
+    width: 100%;
+    justify-content: space-between; /* Push items to the left and right */
+  }
+
+  nav ul li {
+    margin: 0 10px; /* Reduce margin for smaller screens */
+  }
+
+  nav ul li a {
+    font-size: 14px; /* Reduce font size for nav links */
+  }
+
+  /* First section adjustments */
+  .firstsection {
+    flex-direction: column;
+    margin: 30px 0;
+  }
+
+  .firstsection > div {
+    width: 90%;
+    margin-bottom: 15px;
+  }
+
+  .leftsection {
+    font-size: 2rem; /* Reduce font size */
+    margin-left: 20px;
+  }
+
+  .rightsection img {
+    width: 200px; /* Smaller image size */
+    height: 250px;
+  }
+
+  /* Second section adjustments */
+  .secondsection {
+    flex-direction: column;
+  }
+
+  .secondsection > div {
+    width: 90%;
+    margin-bottom: 15px;
+  }
+
+  /* Third and fourth sections adjustments */
+  .thirdsection, .fourthsection {
+    flex-direction: column;
+    margin: 15px 0;
+  }
+
+  .thirdsection > div, .fourthsection > div {
+    width: 90%;
+    margin-bottom: 15px;
+  }
+
+  /* Footer adjustments */
+  footer {
+    flex-direction: column;
+    height: auto;
+    padding: 15px 0;
+  }
+
+  footer ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  footer ul li {
+    margin: 5px 0;
+    font-size: 1rem; /* Smaller font size */
+  }
+
+  .leftfooter {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further adjustments for smaller screens */
+  .leftsection {
+    font-size: 1.8rem;
+    margin-left: 10px;
+  }
+
+  .rightsection img {
+    width: 150px; /* Smaller image size */
+    height: 200px;
+  }
+
+  .sectionspsright img, .gssleft img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .sectionspsright a, .gssleft a {
+    font-size: 0.9rem; /* Smaller font size for links */
+  }
+
+  .leftfooter {
+    font-size: 1rem;
+  }
+
+  footer ul li {
+    font-size: 0.9rem;
+  }
+}
