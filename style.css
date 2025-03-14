@@ -378,4 +378,7 @@ footer ul li a:hover {
   footer ul li {
     font-size: 0.9rem;
   }
+  .firstsection, .secondsection, .thirdsection, .fourthsection {
+    margin-left: 100px;
+  }
 }
