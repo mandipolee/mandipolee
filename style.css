@@ -365,6 +365,7 @@ footer ul li a:hover {
 .sectionspsright img{
   display:flex;
   flex-direction:column-reverse;
+  direction: inherit;
 }
   .sectionspsright a, .gssleft a {
     font-size: 0.9rem; /* Smaller font size for links */
