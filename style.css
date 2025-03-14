@@ -1,0 +1,253 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+  color: white;
+  background-color: rgb(2, 2, 26);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 40px;
+  background-color: black;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  list-style: none;
+  margin: 0 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+nav ul li a:hover {
+  color: blueviolet;
+}
+
+#element {
+  color: blueviolet;
+}
+
+.left {
+  font-size: 1.2rem;
+}
+
+.firstsection {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 150px 0px;
+  margin-left: 70px;
+}
+
+.firstsection>div {
+  width: 40%;
+}
+
+.leftsection {
+  font-size: 2.9rem;
+  margin-left: 50px;
+}
+
+.rightsection {
+  width: 80%;
+  display: flex;
+  margin-left: 120px;
+}
+
+.rightsection img {
+  width: 280px;
+  height: 350px;
+  border: solid 5px white;
+  border-radius: 50%;
+}
+.circular-image {
+  width: 280px;
+  height: 350px;
+  border-radius: 50%;
+  border: 5px solid red;
+  object-fit: cover; /* Ensures the face is centered and visible */
+  animation: waveAnimation 4s infinite ease-in-out, borderAnimation 4s infinite linear;
+}
+
+@keyframes borderAnimation {
+  0% {
+    border-color: red;
+  }
+  25% {
+    border-color: blue;
+  }
+  50% {
+    border-color: green;
+  }
+  75% {
+    border-color: yellow;
+  }
+  100% {
+    border-color: red;
+  }
+}
+.purple {
+  color: blueviolet;
+}
+
+hr {
+  border: 0px;
+  margin: 60px 80px;
+  height: 1.2px;
+  background: rgb(201, 103, 246);
+}
+
+.secondsection {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondsection>div {
+  width: 40%;
+}
+
+.sectionone a {
+  margin-right: 30px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.sectionone a:hover {
+  text-decoration: none;
+  height: 4px;
+  width: 20px;
+  background-color: rgb(170, 47, 47);
+  color: white;
+  border-radius: 20%;
+}
+
+.sectionone img {
+  width: 300px;
+  height: 250px;
+
+}
+
+.sectiontwo {
+  font-size: 2rem;
+}
+
+.thirdsection {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0px 90px;
+}
+
+.thirdsection>div {
+  width: 40%;
+}
+
+.sectionspsleft {
+  font-size: 2rem;
+}
+
+.sectionspsright img {
+  width: 300px;
+  height: 250px;
+  margin-left: 120px;
+}
+
+.sectionspsright a {
+  color: white;
+}
+
+#line {
+  margin-left: 120px;
+}
+
+.sectionspsright a:hover {
+  text-decoration: none;
+  height: 4px;
+  width: 20px;
+  background-color: rgb(170, 47, 47);
+  color: white;
+  border-radius: 20%;
+}
+
+.fourthsection {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0px 100px;
+}
+
+.fourthsection>div {
+  width: 40%;
+}
+
+.gssleft img {
+  width: 300px;
+  height: 250px;
+
+}
+
+.gssleft a {
+  color: white;
+}
+
+.gssleft a:hover {
+  text-decoration: none;
+  height: 4px;
+  width: 20px;
+  background-color: rgb(170, 47, 47);
+  color: white;
+  border-radius: 20%;
+}
+
+.gssright {
+  font-size: 2rem;
+}
+
+footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80px;
+  background-color: black;
+  margin-top: 100px;
+}
+
+.leftfooter {
+  font-size: 1.8rem;
+}
+
+footer ul {
+  display: flex;
+  justify-content: center;
+}
+
+footer ul li {
+  list-style: none;
+  margin: 0px 20px;
+  font-size: 1.5rem;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: rgb(91, 106, 193);
+}
+
+footer ul li a:hover {
+  color: rgb(211, 117, 73);
+  font-size: 1.2rem;
+}

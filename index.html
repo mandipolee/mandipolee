@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANDIPOLEE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="left">Mandipolee</div>
+            <div class="right">
+                <ul>
+                    <li><a href="#firstsection">Home</a></li>
+                    <li><a href="#thirdsection">About</a></li>
+                    <li><a href="#footer">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="firstsection">
+            <div class="leftsection">Hi,<br>My name is <span class="purple">Mandip olee</span>
+                <div>I am a </div>
+                <span id="element"></span>
+            </div>
+            <div class="rightsection">
+                <img src="m.jpeg" class="circular-image" alt="Face Image">
+            </div>
+        </section>
+        <hr>
+        <section class="secondsection">
+            <div class="sectionone"><img src="salyan.jpg"><br>Click here to <a
+                    href="https://images.app.goo.gl/mAn3si1kVWUC6i2j8">visit</a></div>
+
+            <div class="sectiontwo">I am from Salyan.<br>Salyan is a pictuesque hilly district in Karnali
+                Province.<br>It is
+                also known as the natural beauty of nepal.</div>
+        </section>
+        <hr>
+        <section class="thirdsection">
+            <div class="sectionspsleft">I passed my S.E.E from<br> Salyan Public School.<br>Salyan Public School,
+                located in Luham Bazaar, Salyan, Nepal, focuses on providing quality education.</div>
+            <div class="sectionspsright">
+                <img src="sps.jpg"><br>
+                <div id="line">Click here to <a href="https://www.facebook.com/SPSSALYAN/">visit</a></div>
+
+            </div>
+
+        </section>
+        <hr>
+        <section class="fourthsection">
+            <div class="gssleft"><img src="gorkha.jpg"><br>Click here to <a
+                    href="https://www.gsstulsipur.edu.np">visit</a></div>
+            <div class="gssright">I study at Gorkha Secondary School.<br>Gorkha Secondary School, Tulsipur, is a
+                well-known educational institution providing quality education to students.</div>
+        </section>
+        <footer>
+            <div class="leftfooter">Contact me </div>
+            <div class="rightfooter">
+                <ul>
+                    <li><i class="fa fa-facebook"></i><a href="https://www.facebook.com/mandipolee">facebook</a></li>
+                    <li><i class="fa fa-instagram"></i><a href="https://www.instagram.com/mandipolee">instagram</a></li>
+                    <li><i class="fa fa-whatsapp"></i><a href="https://www.whatsapp.com/mandipolee">whatsapp</a></li>
+                </ul>
+            </div>
+        </footer>
+
+    </main>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed('#element', {
+            strings: [' video editor.', ' web designer.', ' student.'],
+            typeSpeed: 50,
+        });
+        document.querySelector('.leftsection div').style.display = 'inline';
+    </script>
+</body>
+
+</html>
