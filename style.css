@@ -381,7 +381,7 @@ footer ul li a:hover {
   .firstsection, .secondsection, .thirdsection, .fourthsection {
     margin: 0px 20px;
   }
-  .rightsection img, .sectionone img, .sectionspsright img, .gssleft img {
+  .rightsection img{
     margin-left: 35px;
   }
 }
