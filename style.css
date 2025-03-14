@@ -355,8 +355,9 @@ footer ul li a:hover {
   }
 
   .sectionspsright img, .gssleft img {
-    width: 200px;
+    width: 300px;
     height: 250px;
+    margin-left:0px;
   }
 
   .sectionspsright a, .gssleft a {
