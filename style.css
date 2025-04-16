@@ -60,7 +60,8 @@ nav ul li a:hover::after {
   font-size: 1.2rem;
 }
 
-.firstsection {
+
+#firstsection {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -68,7 +69,7 @@ nav ul li a:hover::after {
   margin-left: 70px;
 }
 
-.firstsection>div {
+#firstsection>div {
   width: 40%;
 }
 
@@ -130,14 +131,15 @@ hr {
   background: rgb(201, 103, 246);
 }
 
-.secondsection {
+#secondsection {
   display: flex;
   justify-content: space-around;
   align-items: center;
   justify-content: center;
 }
 
-.secondsection>div {
+
+#secondsection>div {
   width: 40%;
 }
 
