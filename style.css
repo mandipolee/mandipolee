@@ -3,7 +3,8 @@
   padding: 0;
   font-family: 'Times New Roman', Times, serif;
 }
-html{
+
+html {
   scroll-behavior: smooth;
 }
 
@@ -36,8 +37,10 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  position:relative;/* make position same as a*/
+  position: relative;
+  /* make position same as a*/
 }
+
 nav ul li a::after {
   content: '';
   position: absolute;
@@ -48,6 +51,7 @@ nav ul li a::after {
   background: white;
   transition: width 0.3s ease-in-out;
 }
+
 nav ul li a:hover::after {
   width: 100%;
 }
@@ -90,36 +94,46 @@ nav ul li a:hover::after {
   border: solid 5px white;
   border-radius: 50%;
 }
+
 .circular-image {
   width: 280px;
   height: 350px;
   border-radius: 50%;
   border: 5px solid red;
-  object-fit: cover; /* Ensures the face is centered and visible */
+  object-fit: cover;
+  /* Ensures the face is centered and visible */
   animation: waveAnimation 4s infinite ease-in-out, borderAnimation 4s infinite linear;
 }
 
 i {
-  color:white; /* change icon color*/
+  color: white;
+  /* change icon color*/
 }
 
-@keyframes borderAnimation { /* animation of photo border */
+@keyframes borderAnimation {
+
+  /* animation of photo border */
   0% {
     border-color: red;
   }
+
   25% {
     border-color: blue;
   }
+
   50% {
     border-color: green;
   }
+
   75% {
     border-color: yellow;
   }
+
   100% {
     border-color: red;
   }
 }
+
 .purple {
   color: blueviolet;
 }
@@ -280,15 +294,17 @@ footer ul li a::after {
   bottom: -2px;
   width: 0;
   height: 2px;
-  background:white;
+  background: white;
   transition: width 0.3s ease-in-out;
 }
 
 footer ul li a:hover::after {
   width: 100%;
-  
+
 }
+
 @media (max-width: 768px) {
+
   /* Adjust body font size */
   body {
     font-size: 14px;
@@ -296,69 +312,86 @@ footer ul li a:hover::after {
 
   /* Navigation adjustments */
   nav {
-    flex-direction: row; /* Keep nav items in a row */
-    justify-content: space-between; /* Align items to the left and right */
-    padding: 0 20px; /* Add padding for spacing */
+    flex-direction: row;
+    /* Keep nav items in a row */
+    justify-content: space-between;
+    /* Align items to the left and right */
+    padding: 0 20px;
+    /* Add padding for spacing */
   }
 
   nav ul {
-    flex-direction: row; /* Ensure nav items stay in a row */
+    flex-direction: row;
+    /* Ensure nav items stay in a row */
     width: 100%;
-    justify-content: space-between; /* Push items to the left and right */
+    justify-content: space-between;
+    /* Push items to the left and right */
   }
 
   nav ul li {
-    margin: 0 10px; /* Reduce margin for smaller screens */
+    margin: 0 10px;
+    /* Reduce margin for smaller screens */
   }
 
   nav ul li a {
-    font-size: 14px; /* Reduce font size for nav links */
+    font-size: 14px;
+    /* Reduce font size for nav links */
   }
 
   /* First section adjustments */
-  .firstsection {
-    display:flex;
-    flex-direction: column-reverse;;
+  #firstsection {
+    display: flex;
+    flex-direction: column-reverse;
+    ;
     margin: 30px 0;
   }
 
-  .firstsection > div {
+  #firstsection>div {
     width: 90%;
     margin-bottom: 15px;
   }
 
   .leftsection {
-    font-size: 2rem; /* Reduce font size */
+    font-size: 2rem;
+    /* Reduce font size */
     margin-left: 20px;
   }
 
   .rightsection img {
-    width: 200px; /* Smaller image size */
+    width: 200px;
+    /* Smaller image size */
     height: 250px;
-    
+
   }
 
   /* Second section adjustments */
-  .secondsection {
+  #secondsection {
     flex-direction: column;
   }
 
-  .secondsection > div {
+
+
+
+  #secondsection>div {
     width: 90%;
     margin-bottom: 15px;
   }
 
   /* Third and fourth sections adjustments */
-  .thirdsection, .fourthsection {
+  .thirdsection,
+  .fourthsection {
     flex-direction: column;
     margin: 15px 0;
   }
-.thirdsection{
-  display:flex;
-  flex-direction:column-reverse;
-  margin-left:0px;
-}
-  .thirdsection > div, .fourthsection > div {
+
+  .thirdsection {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-left: 0px;
+  }
+
+  .thirdsection>div,
+  .fourthsection>div {
     width: 90%;
     margin-bottom: 15px;
   }
@@ -377,7 +410,8 @@ footer ul li a:hover::after {
 
   footer ul li {
     margin: 5px 0;
-    font-size: 1rem; /* Smaller font size */
+    font-size: 1rem;
+    /* Smaller font size */
   }
 
   .leftfooter {
@@ -386,6 +420,7 @@ footer ul li a:hover::after {
 }
 
 @media (max-width: 480px) {
+
   /* Further adjustments for smaller screens */
   .leftsection {
     font-size: 1.82rem;
@@ -393,19 +428,23 @@ footer ul li a:hover::after {
   }
 
   .rightsection img {
-    width: 150px; /* Smaller image size */
+    width: 150px;
+    /* Smaller image size */
     height: 200px;
   }
 
-  .sectionspsright img, .gssleft img {
+  .sectionspsright img,
+  .gssleft img {
     width: 300px;
     height: 250px;
     margin-left: 0px;
     display: flex;
   }
 
-  .sectionspsright a, .gssleft a {
-    font-size: 0.9rem; /* Smaller font size for links */
+  .sectionspsright a,
+  .gssleft a {
+    font-size: 0.9rem;
+    /* Smaller font size for links */
   }
 
   .leftfooter {
@@ -415,10 +454,15 @@ footer ul li a:hover::after {
   footer ul li {
     font-size: 0.9rem;
   }
-  .firstsection, .secondsection, .thirdsection, .fourthsection {
+
+  .firstsection,
+  .secondsection,
+  .thirdsection,
+  .fourthsection {
     margin: 0px 20px;
   }
-  .rightsection img{
+
+  .rightsection img {
     margin-left: 35px;
   }
 }
