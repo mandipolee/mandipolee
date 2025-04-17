@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: open sans;
 }
 
 html {
@@ -11,6 +11,7 @@ html {
 body {
   color: white;
   background-color: rgb(2, 2, 26);
+  text-align: justify;
 }
 
 nav {
@@ -303,3 +304,174 @@ footer ul li a:hover::after {
 
 }
 
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  body{
+    text-align: justify;
+    
+  }
+  nav {
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 60px;
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: row;
+
+  }
+
+  nav ul li {
+    margin: 2px, 0;
+  }
+
+  #firstsection {
+    flex-direction: column-reverse;
+    margin: 20px 0;
+    margin-left: 0;
+
+  }
+
+  #firstsection>div {
+    width: 90%;
+    text-align: center;
+  }
+
+  .leftsection {
+    font-size: 2rem;
+    margin-left: 0;
+  }
+
+  .rightsection {
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .rightsection img {
+    width: 200px;
+    height: 250px;
+  }
+
+  #secondsection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #secondsection>div {
+    width: 90%;
+    text-align: center;
+  }
+ .sectionone img{
+width:350px;
+height:250px;
+ }
+  .sectiontwo {
+    font-size: 1.2rem;
+    justify-content: center;
+    text-align: justify;
+  }
+
+  #thirdsection {
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+    margin: 0px 0px;
+  }
+
+
+
+  .thirdsection {
+    flex-direction: column-reverse;
+    margin: 20px 0;
+    margin-left: 0;
+  }
+
+  .thirdsection>div {
+    width: 90%;
+    text-align: center;
+  }
+
+  .sectionspsleft {
+    font-size: 1.2rem;
+    margin-left: 0;
+  }
+
+  .sectionspsright {
+    margin-right: 23vh;
+    justify-content: center;
+  }
+  .sectionspsright img{
+    width:350px;
+    height:250px;
+     }
+
+
+  .fourthsection {
+    flex-direction: column-reverse;
+    margin: 20px 0;
+    margin-left: 0;
+  }
+
+  .fourthsection>div {
+    width: 90%;
+    text-align: center;
+  }
+
+  .gssright {
+
+    margin-left: 0;
+  }
+
+  .gssleft {
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .gssleft img{
+    width:350px;
+    height:250px;
+     }
+
+  .fourthsection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+
+  .gssright {
+    font-size: 1.2rem;
+  }
+
+  #footer {
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .leftfooter {
+    font-size: 1.2rem;
+  }
+
+  footer ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  footer ul li {
+    display: flex;
+    flex-direction: row;
+    margin: 0px 10px;
+    font-size: 1.2rem;
+  }
+
+  footer ul li a {
+    text-decoration: none;
+    color: rgb(91, 106, 193);
+  }
+}
