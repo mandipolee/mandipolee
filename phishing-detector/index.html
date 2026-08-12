@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0e14" />
+  <title>PhishGuard — AI Phishing Detector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <a href="#" class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+      PhishGuard
+    </a>
+    <nav class="nav">
+      <a href="#" class="nav-item active" data-page="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+        Dashboard
+      </a>
+      <a href="#" class="nav-item" data-page="scanner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        Scanner
+      </a>
+      <a href="#" class="nav-item" data-page="history">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+        History
+      </a>
+      <a href="#" class="nav-item" data-page="about">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        About
+      </a>
+    </nav>
+    <div class="sys-status"><span class="dot"></span>System Active</div>
+  </aside>
+
+  <main class="main">
+    <!-- DASHBOARD -->
+    <section class="page active" id="page-dashboard">
+      <header class="page-head">
+        <h1>Threat Overview</h1>
+        <p>Real-time summary of scanned URLs and detected threats.</p>
+      </header>
+      <div class="stats">
+        <div class="stat"><span class="stat-label">Total Scans</span><span class="stat-num" id="stat-total">0</span></div>
+        <div class="stat"><span class="stat-label">Phishing</span><span class="stat-num phishing" id="stat-phish">0</span><span class="stat-sub" id="stat-phish-pct">0% of total</span></div>
+        <div class="stat"><span class="stat-label">Suspicious</span><span class="stat-num suspicious" id="stat-susp">0</span></div>
+        <div class="stat"><span class="stat-label">Safe</span><span class="stat-num safe" id="stat-safe">0</span></div>
+      </div>
+      <div class="charts">
+        <div class="chart-card"><h3>Scan Volume — Last 30 Days</h3><div class="bar-chart" id="volumeChart"></div></div>
+        <div class="chart-card"><h3>Verdict Breakdown</h3><div id="verdictList"></div></div>
+        <div class="chart-card"><h3>Frequently Scanned Domains</h3><div id="domainList"></div></div>
+      </div>
+    </section>
+
+    <!-- SCANNER -->
+    <section class="page" id="page-scanner">
+      <header class="page-head">
+        <h1>URL Scanner</h1>
+        <p>Paste any link to score it 0–100 across 30+ structural, domain, and reputation signals.</p>
+      </header>
+      <div class="scan-box">
+        <input type="text" id="scanInput" placeholder="Paste a URL to scan…" />
+        <button id="scanBtn" class="btn">Scan</button>
+      </div>
+      <div id="scanResult" class="result hidden"></div>
+    </section>
+
+    <!-- HISTORY -->
+    <section class="page" id="page-history">
+      <header class="page-head">
+        <h1>Scan History</h1>
+        <p>Every scan logged locally in your browser.</p>
+      </header>
+      <div id="historyList"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="page" id="page-about">
+      <header class="page-head">
+        <h1>About PhishGuard</h1>
+        <p>A phishing URL detector built as a portfolio project by Mandip Oli.</p>
+      </header>
+      <div class="about-card">
+        <p>PhishGuard scores any URL from 0 to 100 using an advanced 25+ signal heuristic engine: brand impersonation detection (40+ protected brands), homoglyph and Cyrillic look-alike characters, punycode/IDN homograph attacks, typosquatting patterns, credential-harvesting path analysis, suspicious subdomains, high-entropy generated domains, URL shortener abuse, suspicious query parameters, non-standard ports, and known phishing-kit patterns — with weighted scoring, four verdict tiers, and per-signal explanations.</p>
+        <div class="tech-row">
+          <span class="tech">React</span><span class="tech">TypeScript</span><span class="tech">Node.js</span><span class="tech">PostgreSQL</span>
+        </div>
+        <p class="note">This demo runs entirely in your browser. Scans are stored locally and never leave your device.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="engine.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

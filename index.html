@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mandip Oli — Cybersecurity Student, Ethical Hacking and Cybersecurity at Softwarica College, Kathmandu." />
+  <meta name="theme-color" content="#0a0e14" />
+  <title>Mandip Oli — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dark">
+
+  <!-- ============ NAV ============ -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo-link">
+        <svg class="nav-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+        </svg>
+        <span class="logo-fg">MANDIP</span><span class="logo-accent">OLI</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" data-section="about">About<span class="link-underline"></span></a></li>
+        <li><a href="#skills" data-section="skills">Skills<span class="link-underline"></span></a></li>
+        <li><a href="#projects" data-section="projects">Projects<span class="link-underline"></span></a></li>
+        <li><a href="#education" data-section="education">Background<span class="link-underline"></span></a></li>
+        <li><a href="#experience" data-section="experience">Experience<span class="link-underline"></span></a></li>
+        <li><a href="#contact" data-section="contact">Contact<span class="link-underline"></span></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <canvas id="particleCanvas"></canvas>
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-emblem" aria-hidden="true">
+        <svg class="emblem-svg" viewBox="0 0 220 220" fill="none">
+          <defs>
+            <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#00C8FF" stop-opacity="0.25"/><stop offset="100%" stop-color="#00C8FF" stop-opacity="0"/></radialGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <filter id="softGlow"><feGaussianBlur stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <circle cx="110" cy="110" r="100" fill="url(#coreGlow)"/>
+          <circle class="em-rot em-rot--cw em-rot--1" cx="110" cy="110" r="100" stroke="#00C8FF" stroke-width="1" stroke-opacity="0.15" stroke-dasharray="4 8"/>
+          <circle class="em-rot em-rot--ccw em-rot--2" cx="110" cy="110" r="88" stroke="#00C8FF" stroke-width="1.5" stroke-opacity="0.35" stroke-dasharray="55 145 25 75" stroke-linecap="round" filter="url(#glow)"/>
+          <circle class="em-rot em-rot--cw em-rot--3" cx="110" cy="110" r="74" stroke="#00FFF0" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="30 50 10 70" stroke-linecap="round"/>
+          <circle class="em-rot em-rot--cw em-rot--4" cx="110" cy="110" r="60" stroke="#00FFF0" stroke-width="2" stroke-opacity="0.7" stroke-dasharray="20 358" stroke-linecap="round" filter="url(#glow)"/>
+          <circle class="em-rot em-rot--ccw em-rot--5" cx="110" cy="110" r="60" stroke="#00C8FF" stroke-width="2" stroke-opacity="0.6" stroke-dasharray="10 368" stroke-linecap="round" filter="url(#glow)"/>
+          <g class="em-scan" opacity="0.65"><line x1="68" y1="110" x2="152" y2="110" stroke="#00C8FF" stroke-width="1" stroke-linecap="round"/><line x1="60" y1="110" x2="160" y2="110" stroke="#00C8FF" stroke-width="4" stroke-opacity="0.3" stroke-linecap="round"/></g>
+          <line x1="205" y1="110" x2="196" y2="110" stroke="#00C8FF" stroke-width="1.5" stroke-opacity="0.5" stroke-linecap="round"/>
+          <line x1="177.175" y1="177.175" x2="170.811" y2="170.811" stroke="#00C8FF" stroke-width="1.5" stroke-opacity="0.5" stroke-linecap="round"/>
+          <line x1="110" y1="205" x2="110" y2="196" stroke="#00C8FF" stroke-width="1.5" stroke-opacity="0.5" stroke-linecap="round"/>
+          <line x1="42.825" y1="177.175" x2="49.189" y2="170.811" stroke="#00C8FF" stroke-width="1.5" stroke-opacity="0.5" stroke-linecap="round"/>
+          <line x1="15" y1="110" x2="24" y2="110" stroke="#00C8FF" stroke-width="1.5" stroke-opacity="0.5" stroke-linecap="round"/>
+          <line x1="42.825" y1="42.825" x2="49.189" y2="49.189" stroke="#00C8FF" stroke-width="1.5" stroke-opacity="0.5" stroke-linecap="round"/>
+          <line x1="110" y1="15" x2="110" y2="24" stroke="#00C8FF" stroke-width="1.5" stroke-opacity="0.5" stroke-linecap="round"/>
+          <line x1="177.175" y1="42.825" x2="170.811" y2="49.189" stroke="#00C8FF" stroke-width="1.5" stroke-opacity="0.5" stroke-linecap="round"/>
+          <circle cx="110" cy="110" r="44" fill="#080d18"/>
+          <circle cx="110" cy="110" r="44" stroke="#00C8FF" stroke-width="1" stroke-opacity="0.5" filter="url(#softGlow)"/>
+          <path d="M110 72 L86 82 L86 104 C86 120 96 132 110 138 C124 132 134 120 134 104 L134 82 Z" fill="rgba(0,200,255,0.06)" stroke="#00C8FF" stroke-width="1.5" stroke-linejoin="round" filter="url(#glow)"/>
+          <rect x="101" y="105" width="18" height="14" rx="2" fill="rgba(0,255,240,0.1)" stroke="#00FFF0" stroke-width="1.2"/>
+          <path d="M105 105 L105 100 C105 95.5 115 95.5 115 100 L115 105" fill="none" stroke="#00C8FF" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="110" cy="111" r="2.5" fill="#00FFF0" filter="url(#glow)"/>
+          <circle class="em-ping" cx="110" cy="110" r="44" fill="none" stroke="#00C8FF" stroke-width="2" opacity="0.32"/>
+        </svg>
+      </div>
+      <p class="hero-brand-line"><span class="green-prompt">mandip@sec</span>:~$</p>
+      <h1 class="hero-name">Hi, I'm <span class="hero-name-accent">Mandip Oli</span></h1>
+      <p class="hero-quote">&gt; Cybersecurity Student<span class="cursor-block" aria-hidden="true"></span></p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn--primary">View Projects</a>
+        <a href="#contact" class="btn btn--outline">Contact Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 01. ABOUT ============ -->
+  <section class="section" id="about">
+    <div class="container reveal-up">
+      <header class="section-head">
+        <h2 class="section-title"><span class="num">01.</span>About Me</h2>
+        <div class="head-line"></div>
+      </header>
+      <div class="about-grid">
+        <div class="glass-card about-card">
+          <p>I am a passionate cybersecurity and technology enthusiast currently pursuing a <span class="edu-degree">BSc (Hons) in Ethical Hacking and Cybersecurity</span> at Softwarica IT and E-Commerce College, Kathmandu.</p>
+          <p>Fascinated by how digital systems communicate, defend, and break, I am dedicated to mastering ethical hacking, network security, and the tools that protect our digital world. I believe in learning by doing — breaking things to understand them, and building to secure them.</p>
+        </div>
+        <div class="education-log">
+          <h3 class="edu-title">System_Log: <span class="text-accent">Education Path</span></h3>
+          <div class="edu-timeline">
+            <div class="edu-item">
+              <span class="edu-dot"></span>
+              <div class="edu-info">
+                <span class="edu-stage edu-stage--plain">SEE</span>
+                <span class="edu-school">Salyan Public School</span>
+                <span class="edu-place">Salyan</span>
+              </div>
+            </div>
+            <div class="edu-item">
+              <span class="edu-dot"></span>
+              <div class="edu-info">
+                <span class="edu-stage edu-stage--plain">SLC</span>
+                <span class="edu-school">Gorkha Secondary School</span>
+                <span class="edu-place">Tulsipur, Dang</span>
+              </div>
+            </div>
+            <div class="edu-item">
+              <span class="edu-dot edu-dot--accent"></span>
+              <div class="edu-info">
+                <span class="edu-stage badge">Currently Studying</span>
+                <span class="edu-school">Softwarica IT and E-Commerce College</span>
+                <span class="edu-place">Kathmandu</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02. SKILLS ============ -->
+  <section class="section section--alt" id="skills">
+    <div class="container reveal-up">
+      <header class="section-head">
+        <h2 class="section-title"><span class="num">02.</span>Skills</h2>
+        <div class="head-line"></div>
+      </header>
+      <p class="section-lead">// Actively learning — these are the domains I am building deep expertise in. Every skill listed is in progress, practiced daily, and compounding.</p>
+      <div class="skill-grid">
+        <article class="skill-card ref-card group">
+          <div class="ref-card-head">
+            <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg></span>
+            <h3>Cybersecurity</h3>
+          </div>
+          <ul class="ref-skills">
+            <li><span class="tri">&#9649;</span>Network Security</li>
+            <li><span class="tri">&#9649;</span>Threat Analysis</li>
+            <li><span class="tri">&#9649;</span>Vulnerability Assessment</li>
+          </ul>
+        </article>
+        <article class="skill-card ref-card group">
+          <div class="ref-card-head">
+            <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="6" height="6" x="16" y="16" rx="1"/><rect width="6" height="6" x="2" y="16" rx="1"/><rect width="6" height="6" x="9" y="2" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg></span>
+            <h3>Networking</h3>
+          </div>
+          <ul class="ref-skills">
+            <li><span class="tri">&#9649;</span>TCP/IP</li>
+            <li><span class="tri">&#9649;</span>Network Protocols</li>
+            <li><span class="tri">&#9649;</span>Firewall Configuration</li>
+          </ul>
+        </article>
+        <article class="skill-card ref-card group">
+          <div class="ref-card-head">
+            <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8"/><path d="m4 17 6-6-6-6"/></svg></span>
+            <h3>Ethical Hacking</h3>
+          </div>
+          <ul class="ref-skills">
+            <li><span class="tri">&#9649;</span>Penetration Testing</li>
+            <li><span class="tri">&#9649;</span>OSINT</li>
+            <li><span class="tri">&#9649;</span>Social Engineering</li>
+          </ul>
+        </article>
+        <article class="skill-card ref-card group">
+          <div class="ref-card-head">
+            <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></span>
+            <h3>Linux</h3>
+          </div>
+          <ul class="ref-skills">
+            <li><span class="tri">&#9649;</span>Kali Linux</li>
+            <li><span class="tri">&#9649;</span>Command Line</li>
+            <li><span class="tri">&#9649;</span>Shell Scripting</li>
+          </ul>
+        </article>
+        <article class="skill-card ref-card group">
+          <div class="ref-card-head">
+            <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg></span>
+            <h3>Programming</h3>
+          </div>
+          <ul class="ref-skills">
+            <li><span class="tri">&#9649;</span>Python</li>
+            <li><span class="tri">&#9649;</span>Bash</li>
+            <li><span class="tri">&#9649;</span>JavaScript Basics</li>
+          </ul>
+        </article>
+        <article class="skill-card ref-card group">
+          <div class="ref-card-head">
+            <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg></span>
+            <h3>Mathematics</h3>
+          </div>
+          <ul class="ref-skills">
+            <li><span class="tri">&#9649;</span>Logic &amp; Discrete Math</li>
+            <li><span class="tri">&#9649;</span>Cryptography Fundamentals</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03. PROJECTS ============ -->
+  <section class="section" id="projects">
+    <div class="container reveal-up">
+      <header class="section-head">
+        <h2 class="section-title"><span class="num">03.</span>Projects</h2>
+        <div class="head-line"></div>
+      </header>
+      <div class="project-card">
+        <div class="project-card-head">
+          <div>
+            <h3 class="project-name">PhishGuard <span class="badge badge--live">Live Demo</span></h3>
+            <p class="project-desc">Phishing URL detector that scores any link 0–100 across 30+ structural, domain, and reputation signals.</p>
+          </div>
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">PostgreSQL</span>
+        </div>
+        <div class="full-scanner">
+          <div class="scan-bar">
+            <input type="text" id="demoScanInput" placeholder="Paste a URL to scan…" aria-label="URL to scan" />
+            <button type="button" id="demoScanBtn">SCAN</button>
+          </div>
+          <div id="demoScanResult"></div>
+          <div id="demoScanHistory" class="scan-history"></div>
+        </div>
+        <div class="project-links">
+          <a href="./phishing-detector/index.html" class="btn btn--primary btn--sm">Open full app</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04. BACKGROUND ============ -->
+  <section class="section section--alt" id="education">
+    <div class="container reveal-up">
+      <header class="section-head">
+        <h2 class="section-title"><span class="num">04.</span>Background</h2>
+        <div class="head-line"></div>
+      </header>
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <h3>Technology &amp; Cybersecurity Studies</h3>
+              <span class="badge badge--progress">In Progress</span>
+            </div>
+            <p class="timeline-type">Formal Education</p>
+            <p class="timeline-desc">Pursuing formal education focusing on computer science, network infrastructure, and security fundamentals.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <h3>Self-Directed Security Path</h3>
+              <span class="badge badge--ongoing">Ongoing</span>
+            </div>
+            <p class="timeline-type">Independent Learning</p>
+            <p class="timeline-desc">Intensive hands-on labs, virtual machines, and defensive/offensive security modules.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <h3>Certifications &amp; Platforms</h3>
+              <span class="badge badge--none">None Yet</span>
+            </div>
+            <p class="timeline-type">Professional Validation</p>
+            <p class="timeline-desc">No professional certificates earned yet. Working toward earning recognized certifications as skills develop.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05. EXPERIENCE ============ -->
+  <section class="section" id="experience">
+    <div class="container reveal-up">
+      <header class="section-head">
+        <h2 class="section-title"><span class="num">05.</span>Field Experience</h2>
+        <div class="head-line"></div>
+      </header>
+      <div class="empty-card">
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            <rect width="20" height="14" x="2" y="6" rx="2"></rect>
+          </svg>
+        </div>
+        <div class="empty-text">
+          <p class="empty-title">No Field Experience Yet</p>
+          <p class="empty-desc">// Still early in the journey. Actively building knowledge and looking for opportunities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06. CONTACT ============ -->
+  <section class="section section--alt" id="contact">
+    <div class="container reveal-up">
+      <header class="section-head">
+        <h2 class="section-title"><span class="num">06.</span>Establish Connection</h2>
+        <div class="head-line"></div>
+      </header>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p class="contact-lead">Whether you have a question, an opportunity, or just want to discuss cybersecurity — my terminal is always open.</p>
+          <div class="contact-stack">
+            <a href="mailto:olimandip74@gmail.com" class="contact-email">
+              <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect width="20" height="16" x="2" y="4" rx="2"/></svg></span>
+              <span class="mono">olimandip74@gmail.com</span>
+            </a>
+            <div class="socials">
+              <a href="https://www.linkedin.com/in/mandipolee" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a href="https://github.com/mandipolee" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              </a>
+              <a href="https://www.facebook.com/mandipolee" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>
+              </a>
+            </div>
+            <div class="location-card">
+              <div class="loc-emblem"><span class="loc-dot"></span></div>
+              <div class="mono loc-label">Location</div>
+              <div class="loc-value">Nepal</div>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form glass-card" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-field">
+              <label>Name</label>
+              <input type="text" name="name" placeholder="Your name" required />
+            </div>
+            <div class="form-field">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="your@email.com" required />
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Subject</label>
+            <input type="text" name="subject" placeholder="What's this about?" />
+          </div>
+          <div class="form-field">
+            <label>Message</label>
+            <textarea name="message" rows="5" placeholder="Write your message here..." required></textarea>
+          </div>
+          <div class="form-status" id="formStatus" role="status"></div>
+          <button type="submit" class="btn btn--primary">Transmit Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer ref-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h2 class="footer-logo">MANDIP<span>OLI</span></h2>
+        <p class="mono footer-tagline">Securing the digital future, one byte at a time.</p>
+      </div>
+      <div class="footer-socials">
+        <a href="https://www.linkedin.com/in/mandipolee" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://github.com/mandipolee" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://www.facebook.com/mandipolee" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>
+        </a>
+        <div class="footer-vsep"></div>
+        <button class="back-to-top" id="backToTop" aria-label="Back to top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+        </button>
+      </div>
+    </div>
+    <p class="footer-copy mono">© 2026 Mandip Oli. All rights reserved.</p>
+  </footer>
+
+  <script src="./phishing-detector/engine.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
