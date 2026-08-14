@@ -739,3 +739,20 @@ img, svg { display: block; }
   cursor: pointer; transition: all var(--t);
 }
 #pwToggleBtn:hover, #pwClearBtn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+/* ===== VaultAudit: generator options + education/engineering blocks ===== */
+.pw-gen-opts { margin-top: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,0.02); }
+.pw-gen-opts-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.pw-gen-opts-label { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); letter-spacing: 0.06em; }
+.pw-gen-opts-label span { color: var(--accent); font-weight: 700; }
+#pwGenLength { flex: 1; max-width: 240px; accent-color: var(--accent); cursor: pointer; }
+.pw-gen-chks { margin-top: 8px; }
+.pw-gen-chks label { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); cursor: pointer; user-select: none; }
+.pw-gen-chks label:hover { color: var(--text); }
+.pw-gen-chks input[type="checkbox"] { accent-color: var(--accent); margin-right: 5px; cursor: pointer; vertical-align: middle; }
+.pw-edu-block { margin-top: 12px; }
+.pw-edu-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.pw-edu-list li { font-family: var(--font-mono); font-size: 12px; line-height: 1.6; color: var(--text-dim); background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 6px; padding: 7px 10px; transition: border-color var(--t), background var(--t), transform var(--t); }
+.pw-edu-list li:hover { border-color: var(--accent); background: rgba(64,156,255,0.05); transform: translateX(2px); }
+.pw-edu-list li strong { color: var(--text); }
+.pw-edu-list li .tri { color: var(--accent); margin-right: 8px; }

@@ -489,10 +489,26 @@
         pwInput.focus();
       });
     }
+    var pwGenLength = $("#pwGenLength");
+    var pwGenLengthVal = $("#pwGenLengthVal");
+    if (pwGenLength && pwGenLengthVal) {
+      pwGenLength.addEventListener("input", function () { pwGenLengthVal.textContent = pwGenLength.value; });
+    }
+    function pwGenOpts() {
+      var upper = $("#pwGenUpper"); var lower = $("#pwGenLower");
+      var digits = $("#pwGenDigits"); var symbols = $("#pwGenSymbols");
+      return {
+        length: pwGenLength ? parseInt(pwGenLength.value, 10) || 24 : 24,
+        upper: !upper || upper.checked,
+        lower: !lower || lower.checked,
+        digits: !digits || digits.checked,
+        symbols: !symbols || symbols.checked
+      };
+    }
     if (pwGenBtn && pwGenOutput) {
       pwGenBtn.addEventListener("click", function () {
         try {
-          var gen = PasswordEngine.generate({ length: 18, upper: true, lower: true, digits: true, symbols: true });
+          var gen = PasswordEngine.generate(pwGenOpts());
           pwGenOutput.innerHTML =
             "<div class='pw-gen-row'>" +
               "<code class='pw-gen-code' id='pwGenCode'>" + escapeHtml(gen) + "</code>" +
