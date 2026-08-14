@@ -122,9 +122,6 @@
   var scanInput = $("#demoScanInput");
   var scanBtn = $("#demoScanBtn");
 
-  var historyLog = JSON.parse((localStorage.getItem("pg-history-v2") || "[]"));
-  var MAX_HISTORY = 8;
-
   function tierColor(cls) {
     return cls === "scan-bad" ? "#ef4444" : cls === "scan-warn" ? "#f59e0b" : cls === "scan-warn2" ? "#f59e0b" : "#22c55e";
   }
@@ -162,43 +159,6 @@
     });
   }
 
-  /* HISTORY EXPIRY: recent-scan entries auto-clear after 30 seconds (privacy rule) */
-  var HISTORY_LIFETIME_MS = 30000;
-
-  function expireHistory() {
-    var now = Date.now();
-    var changed = false;
-    historyLog = historyLog.filter(function (h) {
-      if (h.ts && now - h.ts > HISTORY_LIFETIME_MS) { changed = true; return false; }
-      return true;
-    });
-    if (changed) {
-      try { localStorage.setItem("pg-history-v2", JSON.stringify(historyLog)); } catch (e) {}
-      renderHistory();
-    }
-  }
-
-  function renderHistory() {
-    var box = $("#demoScanHistory");
-    if (!box) return;
-    if (!historyLog.length) { box.innerHTML = ""; return; }
-    box.innerHTML =
-      "<div class='history-head'>Recent scans <span class='history-ttl'>(auto-clear in 30s)</span></div>" +
-      historyLog.map(function (h) {
-        return "<div class='history-row' data-url='" + escapeHtml(h.url) + "'>" +
-          "<span class='history-name' title='" + escapeHtml(h.url) + "'>" + escapeHtml(h.url) + "</span>" +
-          "<span class='history-score' style='color:" + tierColor(h.cls) + ";'>" + h.score + " / " + h.tier + "</span>" +
-        "</div>";
-      }).join("");
-    box.querySelectorAll(".history-row").forEach(function (row) {
-      row.addEventListener("click", function () {
-        var url = row.getAttribute("data-url");
-        scanInput.value = url;
-        scanBtn.click();
-      });
-    });
-  }
-
   if (scanInput && scanBtn && typeof PhishGuardEngine !== "undefined") {
     scanBtn.addEventListener("click", function () {
       var raw = scanInput.value.trim();
@@ -207,15 +167,10 @@
       if (!res) { scanInput.focus(); return; }
       scanInput.value = "";
       renderResult(res);
-      historyLog.unshift({ url: res.url, score: res.score, tier: res.tier, cls: res.cls, ts: Date.now() });
-      if (historyLog.length > MAX_HISTORY) historyLog = historyLog.slice(0, MAX_HISTORY);
-      try { localStorage.setItem("pg-history-v2", JSON.stringify(historyLog)); } catch (e) {}
-      renderHistory();
     });
     scanInput.addEventListener("keydown", function (e) {
       if (e.key === "Enter") { e.preventDefault(); scanBtn.click(); }
     });
-    renderHistory();
   }
 
   /* ---------- 5b. PhoneTrace OSINT live investigator (privacy-safe) ---------- */
@@ -223,9 +178,6 @@
   var ptUserInput = $("#ptUsernameInput");
   var ptBtn = $("#ptScanBtn");
   var ptResult = $("#ptResult");
-
-  var ptHistoryLog = JSON.parse((localStorage.getItem("pt-history") || "[]"));
-  var PT_MAX_HISTORY = 8;
 
   function ptTierColor(cls) {
     return cls === "pt-strong" ? "#22c55e" : cls === "pt-possible" ? "#f59e0b" : cls === "pt-low" ? "#ef4444" : "#8892a8";
@@ -332,51 +284,6 @@
     ptDownload("phonetrace-" + res.investigationId.toLowerCase() + ".csv", rows.map(function (r) { return r.map(esc).join(","); }).join("\n"), "text/csv");
   }
 
-  /* HISTORY EXPIRY: recent-investigation entries auto-clear after 30 seconds (privacy rule) */
-  function ptExpireHistory() {
-    var now = Date.now();
-    var changed = false;
-    ptHistoryLog = ptHistoryLog.filter(function (h) {
-      if (h.ts && now - h.ts > HISTORY_LIFETIME_MS) { changed = true; return false; }
-      return true;
-    });
-    if (changed) {
-      try { localStorage.setItem("pt-history", JSON.stringify(ptHistoryLog)); } catch (e) {}
-      ptRenderHistory();
-    }
-  }
-
-  function ptRenderHistory() {
-    if (!ptResult) return;
-    if (!ptHistoryLog.length) {
-      var inv2 = document.querySelector(".tool-panel .scan-history");
-      if (inv2) inv2.innerHTML = "";
-      var frag2 = document.querySelector(".pt-history-inline");
-      if (frag2) frag2.remove();
-      return;
-    }
-    var frag = document.createElement("div");
-    frag.className = "pt-history-inline";
-    frag.innerHTML = "<div class='pt-block' style='border-bottom:none;'><div class='pt-block-title'>Recent Investigations <span class='history-ttl'>(auto-clear in 30s)</span></div>" +
-      ptHistoryLog.map(function (h) {
-        return "<div class='pt-evidence-row' style='cursor:pointer;' data-pt-id='" + escapeHtml(h.id) + "'>" +
-          "<div class='pt-ev-head'><span class='pt-ev-source'>" + escapeHtml(h.number) + "</span>" +
-          "<span><span class='pt-badge " + h.labelCls + "'>" + escapeHtml(h.label) + " \u00b7 " + h.score + "</span></span></div>" +
-          "</div>";
-      }).join("") + "</div>";
-    /* append history inside the tool panel, before the disclaimer */
-    var inv = document.querySelector(".tool-panel");
-    var existing = inv.querySelector(".pt-history-inline");
-    if (existing) existing.remove();
-    inv.appendChild(frag);
-    frag.querySelectorAll("[data-pt-id]").forEach(function (row) {
-      row.addEventListener("click", function () {
-        var h = ptHistoryLog.find(function (x) { return x.id === row.getAttribute("data-pt-id"); });
-        if (h && ptInput) { ptInput.value = h.number; ptBtn.click(); }
-      });
-    });
-  }
-
   var PLATFORMS_LIST = typeof PhoneTraceEngine !== "undefined" ? PhoneTraceEngine.platforms() : [];
 
   if (ptInput && ptBtn && typeof PhoneTraceEngine !== "undefined") {
@@ -389,21 +296,11 @@
       ptInput.value = "";
       if (ptUserInput) ptUserInput.value = "";
       ptRender(res);
-      ptHistoryLog.unshift({ id: res.investigationId, number: res.number.international, score: res.totalScore, label: res.totalLabel.text, labelCls: res.totalLabel.cls, ts: Date.now() });
-      if (ptHistoryLog.length > PT_MAX_HISTORY) ptHistoryLog = ptHistoryLog.slice(0, PT_MAX_HISTORY);
-      try { localStorage.setItem("pt-history", JSON.stringify(ptHistoryLog)); } catch (e) {}
-      ptRenderHistory();
       if (ptResult) ptResult.scrollIntoView({ behavior: "smooth", block: "center" });
     });
-    /* Global 1s tick: prune any history entry older than 30 seconds */
-    setInterval(function () {
-      expireHistory();
-      ptExpireHistory();
-    }, 1000);
     ptInput.addEventListener("keydown", function (e) {
       if (e.key === "Enter") { e.preventDefault(); ptBtn.click(); }
     });
-    ptRenderHistory();
   }
 
   /* ---------- 6. Contact form (client-side validation + mailto fallback) ---------- */
