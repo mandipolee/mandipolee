@@ -709,3 +709,33 @@ img, svg { display: block; }
 @media (max-width: 860px) {
   .project-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   VAULTAUDIT (password strength analyzer inside project card)
+   ============================================================ */
+.pw-score-num { font-family: var(--font-mono); font-size: 30px; font-weight: 800; line-height: 1; }
+.pw-score-label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; margin-top: 4px; }
+.pw-bar-track { height: 8px; background: rgba(255,255,255,0.06); border: 1px solid var(--line); border-radius: 999px; overflow: hidden; margin-top: 8px; }
+.pw-bar-fill { height: 100%; border-radius: 999px; transition: width var(--t), background var(--t), box-shadow var(--t); }
+.pw-chk-list, .pw-rec-list { list-style: none; display: flex; flex-wrap: wrap; flex-direction: column; gap: 4px; }
+.pw-rec-list li { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); padding: 3px 4px; line-height: 1.5; }
+.pw-chk {
+  font-family: var(--font-mono); font-size: 12.5px; padding: 6px 10px;
+  border: 1px solid var(--line); border-radius: 6px; display: inline-flex; align-items: center; gap: 8px;
+}
+.pw-chk-list { display: flex; flex-direction: column; gap: 6px; }
+.pw-chk-ok { color: #22c55e; border-left: 2px solid #22c55e; background: rgba(34,197,94,0.05); }
+.pw-chk-no { color: #ef4444; border-left: 2px solid #ef4444; background: rgba(239,68,68,0.05); }
+.pw-gen-block { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.pw-gen-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.pw-gen-code {
+  flex: 1; min-width: 0; font-family: var(--font-mono); font-size: 13.5px; color: var(--accent);
+  background: rgba(6,12,24,0.7); border: 1px solid var(--line-strong); border-radius: 8px; padding: 10px 12px;
+  word-break: break-all; user-select: text;
+}
+#pwToggleBtn, #pwClearBtn {
+  font-family: var(--font-mono); font-size: 12px; padding: 0 14px;
+  border: 1px solid var(--line-strong); border-radius: 8px; background: transparent; color: var(--text-dim);
+  cursor: pointer; transition: all var(--t);
+}
+#pwToggleBtn:hover, #pwClearBtn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }

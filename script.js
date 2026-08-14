@@ -400,4 +400,135 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
+
+  /* ---------- 8. VaultAudit: password strength analyzer (client-side only) ---------- */
+  /* SECURITY: the password value is analyzed locally and never stored or transmitted.
+     No localStorage entry, no network request, no console logging of the password. */
+  var pwInput = $("#pwInput");
+  var pwToggleBtn = $("#pwToggleBtn");
+  var pwClearBtn = $("#pwClearBtn");
+  var pwGenBtn = $("#pwGenBtn");
+  var pwResult = $("#pwResult");
+  var pwGenOutput = $("#pwGenOutput");
+  if (pwInput && typeof PasswordEngine !== "undefined") {
+    var PW_CHECK_ITEMS = [
+      { key: "length12", label: "At least 12 characters" },
+      { key: "length16", label: "At least 16 characters (ideal)" },
+      { key: "upper", label: "Uppercase letters" },
+      { key: "lower", label: "Lowercase letters" },
+      { key: "digit", label: "Numbers" },
+      { key: "symbol", label: "Special characters" }
+    ];
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      });
+    }
+
+    function tierColor(cls) {
+      if (cls === "pt-strong") return "#22c55e";
+      if (cls === "pt-possible") return "#f59e0b";
+      return "#ef4444";
+    }
+
+    function pwRender() {
+      /* Value read from the input for local analysis only; cleared on reload. */
+      var pw = pwInput.value;
+      if (!pw) { pwResult.innerHTML = ""; return; }
+      var res = PasswordEngine.analyze(pw);
+      var color = tierColor(res.tier.cls);
+      var checklist = PW_CHECK_ITEMS.map(function (it) {
+        var ok = res.checks[it.key];
+        return "<li class='pw-chk " + (ok ? "pw-chk-ok" : "pw-chk-no") + "'><span>" + (ok ? "&#10003;" : "&#10007;") + "</span>" + escapeHtml(it.label) + "</li>";
+      }).join("");
+      var warns = "";
+      if (res.patterns.common) warns += "<li class='pw-chk pw-chk-no'><span>&#9888;</span>Contains a common pattern</li>";
+      if (res.patterns.repeated) warns += "<li class='pw-chk pw-chk-no'><span>&#9888;</span>Repeated characters detected</li>";
+      if (res.patterns.sequential) warns += "<li class='pw-chk pw-chk-no'><span>&#9888;</span>Sequential characters detected</li>";
+      if (res.patterns.keyboard) warns += "<li class='pw-chk pw-chk-no'><span>&#9888;</span>Keyboard pattern detected</li>";
+      var recs = res.recommendations.map(function (r) {
+        return "<li>&#8226; " + escapeHtml(r) + "</li>";
+      }).join("");
+      var ct = res.crackTimes;
+      var entropy = res.entropy;
+      /* NOTE: entropy is an estimate — displayed with a disclaimer in the UI. */
+      var html =
+        "<div class='pt-result'>" +
+          "<div class='pt-result-head'>" +
+            "<div><div class='pw-score-num' style='color:" + color + ";'>" + res.score + "<span style='font-size:13px;opacity:0.6;'>/100</span></div>" +
+            "<div class='pw-score-label' style='color:" + color + ";'>" + escapeHtml(res.tier.text) + "</div></div>" +
+            "<div style='flex:1;min-width:140px;'><div class='pw-bar-track'><div class='pw-bar-fill' style='width:" + res.score + "%;background:" + color + ";box-shadow:0 0 12px " + color + ";'></div></div></div>" +
+          "</div>" +
+          "<div class='pt-overview'>" +
+            "<div class='pt-ov-item'><div class='pt-ov-label'>Est. Entropy</div><div class='pt-ov-value'>" + entropy + " bits</div></div>" +
+            "<div class='pt-ov-item'><div class='pt-ov-label'>Crack (Online)</div><div class='pt-ov-value'>" + escapeHtml(ct.online.label) + "</div></div>" +
+            "<div class='pt-ov-item'><div class='pt-ov-label'>Crack (Offline)</div><div class='pt-ov-value'>" + escapeHtml(ct.offline.label) + "</div></div>" +
+            "<div class='pt-ov-item'><div class='pt-ov-label'>Crack (Fast Offline)</div><div class='pt-ov-value'>" + escapeHtml(ct.fastOffline.label) + "</div></div>" +
+          "</div>" +
+          "<div class='pt-block'><div class='pt-block-title'>Password Analysis</div><ul class='pw-chk-list'>" + checklist + warns + "</ul></div>" +
+          "<div class='pt-block'><div class='pt-block-title'>Recommendations</div><ul class='pw-rec-list'>" + recs + "</ul></div>" +
+          "<p class='pt-disclaimer' style='margin-top:0;border-top:1px solid var(--line);padding-top:10px;'>// Entropy &amp; crack times are educational estimates — not exact predictions. Entropy assumes a random character distribution.</p>" +
+        "</div>";
+      pwResult.innerHTML = html;
+    }
+
+    pwInput.addEventListener("input", pwRender);
+    if (pwToggleBtn) {
+      pwToggleBtn.addEventListener("click", function () {
+        pwInput.type = pwInput.type === "password" ? "text" : "password";
+        pwInput.focus();
+      });
+    }
+    if (pwClearBtn) {
+      pwClearBtn.addEventListener("click", function () {
+        pwInput.value = "";
+        pwInput.type = "password";
+        pwResult.innerHTML = "";
+        if (pwGenOutput) pwGenOutput.innerHTML = "";
+        pwInput.focus();
+      });
+    }
+    if (pwGenBtn && pwGenOutput) {
+      pwGenBtn.addEventListener("click", function () {
+        try {
+          var gen = PasswordEngine.generate({ length: 18, upper: true, lower: true, digits: true, symbols: true });
+          pwGenOutput.innerHTML =
+            "<div class='pw-gen-row'>" +
+              "<code class='pw-gen-code' id='pwGenCode'>" + escapeHtml(gen) + "</code>" +
+              "<button type='button' class='pt-btn-sm' id='pwGenCopyBtn'>COPY</button>" +
+            "</div>" +
+            "<p class='pt-disclaimer'>// Generated locally using your browser's cryptographically secure random number generator (crypto API). Not stored anywhere — copy it to your password manager.</p>";
+          var copyBtn = $("#pwGenCopyBtn");
+          if (copyBtn) {
+            copyBtn.addEventListener("click", function () {
+              var codeEl = $("#pwGenCode");
+              if (!codeEl) return;
+              var copy = function () {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                  navigator.clipboard.writeText(codeEl.textContent).then(function () {
+                    copyBtn.textContent = "COPIED";
+                    setTimeout(function () { copyBtn.textContent = "COPY"; }, 1600);
+                  }).catch(function () { fallback(); });
+                } else { fallback(); }
+              };
+              var fallback = function () {
+                var ta = document.createElement("textarea");
+                ta.value = codeEl.textContent;
+                ta.style.position = "fixed"; ta.style.opacity = "0";
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand("copy"); copyBtn.textContent = "COPIED"; } catch (e) {}
+                setTimeout(function () { copyBtn.textContent = "COPY"; }, 1600);
+                document.body.removeChild(ta);
+              };
+              copy();
+            });
+          }
+        } catch (err) {
+          pwGenOutput.innerHTML = "<p class='pt-disclaimer' style='color:#ef4444;'>// Secure generation unavailable in this browser.</p>";
+        }
+      });
+    }
+  }
 })();

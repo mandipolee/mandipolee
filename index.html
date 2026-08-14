@@ -240,6 +240,36 @@
           </div>
         </article>
 
+        <!-- VaultAudit: Password Strength Analyzer -->
+        <article class="project-card ref-card group">
+          <div class="ref-card-head">
+            <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg></span>
+            <div>
+              <h3 class="project-name" style="font-size:18px;">VaultAudit <span class="badge badge--live" style="font-size:10px;vertical-align:middle;">Live Demo</span></h3>
+              <p class="skill-tag">Password strength analyzer — 100% client-side, zero transmission</p>
+            </div>
+          </div>
+          <ul class="ref-skills">
+            <li><span class="tri">&#9649;</span>Score 0–100, entropy &amp; crack-time estimates</li>
+            <li><span class="tri">&#9649;</span>Pattern detection: common words, sequences, keyboard rows</li>
+            <li><span class="tri">&#9649;</span>Secure generator (crypto API) + privacy-first design</li>
+          </ul>
+          <!-- VaultAudit live analyzer -->
+          <div class="osint-investigator">
+            <div class="pt-bar">
+              <input type="password" id="pwInput" placeholder="Enter a password to analyze…" autocomplete="off" spellcheck="false" aria-label="Password to analyze" />
+              <button type="button" id="pwToggleBtn" aria-label="Show or hide password" title="Show/hide">&#128065;</button>
+              <button type="button" id="pwClearBtn" aria-label="Clear password input">CLEAR</button>
+            </div>
+            <div id="pwResult"></div>
+            <p class="pt-disclaimer">// Your password is analyzed locally in your browser and is never sent to a server, stored, or logged.</p>
+            <div class="pw-gen-block">
+              <button type="button" id="pwGenBtn" class="pt-btn-sm">Generate Secure Password</button>
+              <div id="pwGenOutput"></div>
+            </div>
+          </div>
+        </article>
+
         <!-- PhoneTrace OSINT -->
         <article class="project-card ref-card group">
           <div class="ref-card-head">
@@ -427,6 +457,7 @@
 
   <script src="/phishing-detector/engine.js"></script>
   <script src="/phonetrace/engine.js"></script>
-  <script src="script.js?v=2"></script>
+  <script src="/password/engine.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>
