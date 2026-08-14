@@ -442,6 +442,7 @@ img, svg { display: block; }
 .history-row:hover { border-color: var(--accent); transform: translateX(3px); }
 .history-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .history-score { flex-shrink: 0; font-weight: 600; font-size: 11px; }
+.history-ttl { opacity: 0.45; font-size: 9px; letter-spacing: 0.08em; }
 
 /* ============================================================
    BACKGROUND (timeline)
@@ -698,11 +699,53 @@ img, svg { display: block; }
 .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .project-grid .project-card { padding: 26px; gap: 16px; }
 .project-grid .project-card .project-name { margin-bottom: 4px; }
-.project-grid .ref-card-head { margin-bottom: 4px; }
-.project-grid .ref-card-head > .ref-icon svg { width: 24px; height: 24px; }
+.project-grid .ref-card-head { margin-bottom: 4px; gap: 12px; }
+.project-grid .ref-card-head > .ref-icon { width: 40px; height: 40px; padding: 9px; }
+.project-grid .ref-card-head > .ref-icon svg { width: 22px; height: 22px; }
 .project-grid .ref-card-head h3 { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.project-grid .osint-investigator { margin-top: 0; }
-.project-grid .project-links { margin-top: 12px; display: flex; flex-wrap: wrap; }
+.project-grid .ref-skills li { padding: 5px 0; font-size: 12.5px; }
+.project-grid .ref-skills { gap: 0; }
+/* Compact live tool panel shared by all three project cards */
+.project-grid .tool-panel {
+  margin-top: 2px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(10, 20, 36, 0.55);
+  padding: 14px;
+  backdrop-filter: blur(6px);
+  display: flex; flex-direction: column; gap: 12px;
+  flex: 1;
+}
+.project-grid .tool-result { max-height: 230px; overflow-y: auto; }
+.project-grid .tool-result:empty { display: none; }
+.project-grid .pt-bar { gap: 8px; }
+.project-grid .pt-bar--sm input { padding: 10px 12px; font-size: 12.5px; }
+.project-grid .pt-bar--sm button { padding: 10px 16px; font-size: 11.5px; }
+.project-grid .scan-bar input { padding: 10px 13px; font-size: 12.5px; }
+.project-grid .scan-bar button { padding: 0 16px; }
+.project-grid .sig-list { gap: 5px; margin-top: 10px; }
+.project-grid .sig-row { font-size: 11px; padding: 6px 10px; }
+.project-grid .pt-overview { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; padding: 12px; }
+.project-grid .pt-ov-item { padding: 8px 10px; }
+.project-grid .pt-block { padding: 12px; }
+.project-grid .pt-evidence-row { padding: 9px 10px; margin-bottom: 6px; }
+.project-grid .pt-platform-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 6px; }
+.project-grid .pt-platform { padding: 8px 10px; }
+.project-grid .pt-actions { padding: 12px; gap: 8px; }
+.project-grid .pw-score-num { font-size: 26px; }
+.project-grid .pt-score { font-size: 26px; }
+.project-grid .result-score-num { font-size: 26px; }
+.project-grid .result-head { padding: 12px 14px; gap: 14px; }
+.project-grid .history-row { padding: 5px 9px; font-size: 11px; margin-bottom: 4px; }
+.project-grid .pt-disclaimer { margin-top: 8px; font-size: 10.5px; }
+.project-grid .btn--sm { padding: 9px 16px; font-size: 11.5px; align-self: flex-start; }
+/* Compact generator row inside VaultAudit card */
+.pw-gen-row-compact { display: flex; align-items: center; gap: 10px; }
+.pw-gen-opts-inline { display: flex; align-items: center; gap: 10px; flex: 1; }
+.pw-gen-opts-inline #pwGenLength { max-width: 140px; }
+.pw-gen-block { margin-top: 0; padding-top: 10px; border-top: 1px solid var(--line); }
+.project-grid .pw-rec-list li { font-size: 11px; }
+.project-grid .pw-chk { font-size: 11.5px; padding: 5px 8px; }
 @media (max-width: 1024px) {
   .project-grid { grid-template-columns: repeat(2, 1fr); }
 }

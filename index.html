@@ -215,7 +215,7 @@
       <p class="section-lead">// Things I have built with my own hands. Each project below is a living tool — try it right here, no demos, no placeholders. Every component is written by me, one line at a time.</p>
 
       <div class="project-grid">
-        <!-- PhishGuard -->
+          <!-- PhishGuard -->
         <article class="project-card ref-card group">
           <div class="ref-card-head">
             <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg></span>
@@ -229,12 +229,12 @@
             <li><span class="tri">&#9649;</span>Typosquatting &amp; punycode analysis</li>
             <li><span class="tri">&#9649;</span>Trusted-domain whitelist (zero false flags)</li>
           </ul>
-          <div class="full-scanner">
+          <div class="tool-panel">
             <div class="scan-bar">
               <input type="text" id="demoScanInput" placeholder="Paste a URL to scan…" aria-label="URL to scan" />
               <button type="button" id="demoScanBtn">SCAN</button>
             </div>
-            <div id="demoScanResult"></div>
+            <div id="demoScanResult" class="tool-result"></div>
             <div id="demoScanHistory" class="scan-history"></div>
             <a href="/phishing-detector/index.html" class="btn btn--primary btn--sm">Open full app</a>
           </div>
@@ -255,51 +255,23 @@
             <li><span class="tri">&#9649;</span>Secure generator (crypto API) + privacy-first design</li>
           </ul>
           <!-- VaultAudit live analyzer -->
-          <div class="osint-investigator">
-            <div class="pt-bar">
+          <div class="tool-panel">
+            <div class="pt-bar pt-bar--sm">
               <input type="password" id="pwInput" placeholder="Enter a password to analyze…" autocomplete="off" spellcheck="false" aria-label="Password to analyze" />
               <button type="button" id="pwToggleBtn" aria-label="Show or hide password" title="Show/hide">&#128065;</button>
               <button type="button" id="pwClearBtn" aria-label="Clear password input">CLEAR</button>
             </div>
-            <div id="pwResult"></div>
-            <p class="pt-disclaimer">// Your password is analyzed locally in your browser and is never sent to a server, stored, or logged.</p>
+            <div id="pwResult" class="tool-result"></div>
+            <p class="pt-disclaimer">// Analyzed locally — never sent, stored, or logged. Try the generator below for a secure alternative.</p>
             <div class="pw-gen-block">
-              <button type="button" id="pwGenBtn" class="pt-btn-sm">Generate Secure Password</button>
-              <div id="pwGenOutput"></div>
-              <div class="pw-gen-opts" id="pwGenOpts">
-                <div class="pw-gen-opts-row">
-                  <label for="pwGenLength" class="pw-gen-opts-label">Length: <span id="pwGenLengthVal">24</span></label>
+              <div class="pw-gen-row-compact">
+                <button type="button" id="pwGenBtn" class="pt-btn-sm">Generate</button>
+                <div class="pw-gen-opts-inline">
+                  <label for="pwGenLength" class="pw-gen-opts-label">Len <span id="pwGenLengthVal">24</span></label>
                   <input type="range" id="pwGenLength" min="12" max="64" step="1" value="24" />
                 </div>
-                <div class="pw-gen-opts-row pw-gen-chks">
-                  <label><input type="checkbox" id="pwGenUpper" checked /> Uppercase</label>
-                  <label><input type="checkbox" id="pwGenLower" checked /> Lowercase</label>
-                  <label><input type="checkbox" id="pwGenDigits" checked /> Numbers</label>
-                  <label><input type="checkbox" id="pwGenSymbols" checked /> Symbols</label>
-                </div>
-                <p class="pt-disclaimer" style="margin-top:8px;">// Generated locally using your browser's cryptographically secure random number generator. Never stored.</p>
               </div>
-            </div>
-            <div class="pt-block pw-edu-block">
-              <div class="pt-block-title">What Makes a Password Strong?</div>
-              <ul class="pw-edu-list">
-                <li><span class="tri">&#9649;</span><strong>Length beats complexity.</strong> Every extra character multiplies the guessing space exponentially — a 16-char password usually beats an 8-char one with symbols.</li>
-                <li><span class="tri">&#9649;</span><strong>One password per account.</strong> A reused password turns one site's breach into every account's breach.</li>
-                <li><span class="tri">&#9649;</span><strong>Use a password manager.</strong> You cannot memorize 200 unique passwords; let the manager hold them.</li>
-                <li><span class="tri">&#9649;</span><strong>Add passkeys &amp; MFA.</strong> Even a perfect password is only one layer; phishing-resistant MFA closes the gap.</li>
-                <li><span class="tri">&#9649;</span><strong>Avoid personal information.</strong> Birthdays, names, and usernames are the first guesses in any targeted attack.</li>
-                <li><span class="tri">&#9649;</span><strong>Skip common patterns.</strong> "Password123", "qwerty", and leet substitutions like "p@ssw0rd" are known to every cracking dictionary.</li>
-              </ul>
-            </div>
-            <div class="pt-block pw-edu-block">
-              <div class="pt-block-title">Security Engineering — How This Works</div>
-              <ul class="pw-edu-list">
-                <li><span class="tri">&#9649;</span><strong>Client-side analysis</strong> — all scoring runs in your browser; nothing leaves the device.</li>
-                <li><span class="tri">&#9649;</span><strong>Entropy estimation</strong> — log&#8322;(pool size) × length, based on the actual character set used.</li>
-                <li><span class="tri">&#9649;</span><strong>Pattern detection</strong> — repeated, sequential, keyboard-row, and common-word heuristics.</li>
-                <li><span class="tri">&#9649;</span><strong>crypto.getRandomValues()</strong> — cryptographic randomness, never Math.random().</li>
-                <li><span class="tri">&#9649;</span><strong>Zero transmission</strong> — no API calls, no telemetry, no storage, no logging.</li>
-              </ul>
+              <div id="pwGenOutput"></div>
             </div>
           </div>
         </article>
@@ -319,13 +291,13 @@
             <li><span class="tri">&#9649;</span>Evidence engine &amp; JSON/CSV export</li>
           </ul>
           <!-- PhoneTrace live investigator -->
-          <div class="osint-investigator">
-            <div class="pt-bar">
-              <input type="text" id="ptNumberInput" placeholder="Enter phone number… e.g. +9779841234567" aria-label="Phone number to investigate" />
+          <div class="tool-panel">
+            <div class="pt-bar pt-bar--sm">
+              <input type="text" id="ptNumberInput" placeholder="Phone number… e.g. +9779841234567" aria-label="Phone number to investigate" />
               <input type="text" id="ptUsernameInput" placeholder="Username (optional)" aria-label="Username for correlation" />
               <button type="button" id="ptScanBtn">INVESTIGATE</button>
             </div>
-            <div id="ptResult"></div>
+            <div id="ptResult" class="tool-result"></div>
             <div id="ptHistory" class="scan-history"></div>
             <p class="pt-disclaimer">// OSINT correlation scores — NOT proof of identity. Verify manually via the links.</p>
           </div>
