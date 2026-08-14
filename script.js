@@ -202,6 +202,169 @@
     renderHistory();
   }
 
+  /* ---------- 5b. PhoneTrace OSINT live investigator (privacy-safe) ---------- */
+  var ptInput = $("#ptNumberInput");
+  var ptUserInput = $("#ptUsernameInput");
+  var ptBtn = $("#ptScanBtn");
+  var ptResult = $("#ptResult");
+
+  var ptHistoryLog = JSON.parse((localStorage.getItem("pt-history") || "[]"));
+  var PT_MAX_HISTORY = 8;
+
+  function ptTierColor(cls) {
+    return cls === "pt-strong" ? "#22c55e" : cls === "pt-possible" ? "#f59e0b" : cls === "pt-low" ? "#ef4444" : "#8892a8";
+  }
+
+  function ptRender(res) {
+    if (!ptResult) return;
+    var n = res.number;
+    var tierColor = ptTierColor(res.totalLabel.cls);
+
+    var ov = [
+      ["Phone Number", n.international],
+      ["National Format", n.national],
+      ["Country", n.country || "—"],
+      ["Validity", n.valid ? "VALID ✓" : "INVALID / UNKNOWN"],
+      ["Type", n.type],
+      ["Carrier (est.)", n.carrier || "Not configured"],
+      ["Investigation ID", res.investigationId],
+      ["Scan Time", res.scanTime]
+    ];
+    var ovHtml = ov.map(function (row) {
+      var cls = row[0] === "Validity" ? (row[1].startsWith("VALID") ? "pt-valid-yes" : "pt-valid-no") : "";
+      return "<div class='pt-ov-item'><div class='pt-ov-label'>" + escapeHtml(row[0]) + "</div><div class='pt-ov-value " + cls + "'>" + escapeHtml(row[1]) + "</div></div>";
+    }).join("");
+
+    /* platform footprint grid: evidence grouped by platform */
+    var platEvidence = {};
+    PLATFORMS_LIST.forEach(function (p) { platEvidence[p.id] = null; });
+    res.evidence.forEach(function (ev) {
+      PLATFORMS_LIST.forEach(function (p) {
+        if (ev.source.indexOf(p.name) === 0 && !platEvidence[p.id]) platEvidence[p.id] = ev;
+      });
+    });
+    function statusBadge(st) {
+      if (st && typeof st === "object" && st.text) return { text: st.text, cls: st.cls || "pt-none" };
+      return { text: "Not Queried", cls: "pt-none" };
+    }
+
+    var gridHtml = PLATFORMS_LIST.map(function (p) {
+      var ev = platEvidence[p.id];
+      var score = ev ? ev.confidence : 0;
+      var label = statusBadge(ev ? ev.status : null);
+      return "<div class='pt-platform'><span class='pt-platform-name'>" + escapeHtml(p.name) + "</span>" +
+        "<span class='pt-badge " + label.cls + "'>" + escapeHtml(label.text) + " · " + score + "</span></div>";
+    }).join("");
+
+    var evHtml = res.evidence.map(function (ev) {
+      return "<div class='pt-evidence-row'>" +
+        "<div class='pt-ev-head'><span class='pt-ev-source'>" + escapeHtml(ev.source) + "</span>" +
+        "<span><span class='pt-badge " + statusBadge(ev.status).cls + "'>" + escapeHtml(statusBadge(ev.status).text) + " · " + ev.confidence + "</span></span></div>" +
+        "<div class='pt-ev-notes'>" + escapeHtml(ev.notes) + "</div>" +
+        (ev.url ? "<a class='pt-ev-link' href='" + escapeHtml(ev.url) + "' target='_blank' rel='noopener'>→ Open public evidence link</a>" : "") +
+        "</div>";
+    }).join("");
+
+    ptResult.className = "pt-result";
+    ptResult.innerHTML =
+      "<div class='pt-result-head'>" +
+        "<div><div class='pt-score' style='color:" + tierColor + ";'>" + res.totalScore + "</div><div class='pt-score-sub'>/ 100 confidence</div></div>" +
+        "<div><div class='pt-tier' style='color:" + tierColor + ";'>" + escapeHtml(res.totalLabel.text) + "</div>" +
+        "<div class='pt-inv-id'>" + escapeHtml(res.investigationId) + " · " + escapeHtml(res.scanTime) + "</div></div>" +
+      "</div>" +
+      "<div class='pt-overview'>" + ovHtml + "</div>" +
+      "<div class='pt-block'><div class='pt-block-title'>Public Footprints</div><div class='pt-platform-grid'>" + gridHtml + "</div></div>" +
+      "<div class='pt-block'><div class='pt-block-title'>Evidence Engine</div>" + evHtml + "</div>" +
+      "<div class='pt-actions'>" +
+        "<button type='button' class='pt-btn-sm' data-pt='export'>EXPORT JSON</button>" +
+        "<button type='button' class='pt-btn-sm' data-pt='csv'>EXPORT CSV</button>" +
+        "<button type='button' class='pt-btn-sm' data-pt='new'>NEW INVESTIGATION</button>" +
+      "</div>";
+
+    /* export handlers */
+    ptResult.querySelectorAll("[data-pt]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var action = b.getAttribute("data-pt");
+        if (action === "export") ptExportJson(res);
+        if (action === "csv") ptExportCsv(res);
+        if (action === "new") { ptInput.value = ""; ptUserInput.value = ""; ptResult.innerHTML = ""; ptInput.focus(); }
+      });
+    });
+  }
+
+  function ptDownload(name, content, mime) {
+    var blob = new Blob([content], { type: mime });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    try { URL.revokeObjectURL(a.href); } catch (e) {}
+  }
+
+  function ptExportJson(res) {
+    ptDownload("phonetrace-" + res.investigationId.toLowerCase() + ".json", JSON.stringify(res, null, 2), "application/json");
+  }
+
+  function ptExportCsv(res) {
+    var esc = function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; };
+    var rows = [["investigation_id", "scan_time", "input", "international", "country", "valid", "type", "source", "evidence_type", "confidence", "label", "notes", "evidence_url"]];
+    res.evidence.forEach(function (ev) {
+      rows.push([res.investigationId, res.scanTime, res.number.raw, res.number.international, res.number.country || "", res.number.valid, res.number.type, ev.source, ev.evidence_type, ev.confidence, ev.status.text, ev.notes, ev.url || ""]);
+    });
+    ptDownload("phonetrace-" + res.investigationId.toLowerCase() + ".csv", rows.map(function (r) { return r.map(esc).join(","); }).join("\n"), "text/csv");
+  }
+
+  function ptRenderHistory() {
+    if (!ptResult) return;
+    if (!ptHistoryLog.length) return;
+    var frag = document.createElement("div");
+    frag.className = "pt-history-inline";
+    frag.innerHTML = "<div class='pt-block' style='border-bottom:none;'><div class='pt-block-title'>Recent Investigations</div>" +
+      ptHistoryLog.map(function (h) {
+        return "<div class='pt-evidence-row' style='cursor:pointer;' data-pt-id='" + escapeHtml(h.id) + "'>" +
+          "<div class='pt-ev-head'><span class='pt-ev-source'>" + escapeHtml(h.number) + "</span>" +
+          "<span><span class='pt-badge " + h.labelCls + "'>" + escapeHtml(h.label) + " · " + h.score + "</span></span></div>" +
+          "</div>";
+      }).join("") + "</div>";
+    /* append history below disclaimer, before card links */
+    var inv = document.querySelector(".osint-investigator");
+    var existing = inv.querySelector(".pt-history-inline");
+    if (existing) existing.remove();
+    inv.appendChild(frag);
+    frag.querySelectorAll("[data-pt-id]").forEach(function (row) {
+      row.addEventListener("click", function () {
+        var h = ptHistoryLog.find(function (x) { return x.id === row.getAttribute("data-pt-id"); });
+        if (h && ptInput) { ptInput.value = h.number; ptBtn.click(); }
+      });
+    });
+  }
+
+  var PLATFORMS_LIST = typeof PhoneTraceEngine !== "undefined" ? PhoneTraceEngine.platforms() : [];
+
+  if (ptInput && ptBtn && typeof PhoneTraceEngine !== "undefined") {
+    ptBtn.addEventListener("click", function () {
+      var raw = ptInput.value.trim();
+      var uname = (ptUserInput && ptUserInput.value || "").trim();
+      if (!raw) { ptInput.focus(); return; }
+      var res = PhoneTraceEngine.analyze(raw, uname);
+      if (!res) { ptInput.focus(); return; }
+      ptInput.value = "";
+      if (ptUserInput) ptUserInput.value = "";
+      ptRender(res);
+      ptHistoryLog.unshift({ id: res.investigationId, number: res.number.international, score: res.totalScore, label: res.totalLabel.text, labelCls: res.totalLabel.cls });
+      if (ptHistoryLog.length > PT_MAX_HISTORY) ptHistoryLog = ptHistoryLog.slice(0, PT_MAX_HISTORY);
+      try { localStorage.setItem("pt-history", JSON.stringify(ptHistoryLog)); } catch (e) {}
+      ptRenderHistory();
+      if (ptResult) ptResult.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+    ptInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); ptBtn.click(); }
+    });
+    ptRenderHistory();
+  }
+
   /* ---------- 6. Contact form (client-side validation + mailto fallback) ---------- */
   var form = $("#contactForm");
   var formStatus = $("#formStatus");

@@ -212,49 +212,63 @@
         <h2 class="section-title"><span class="num">03.</span>Projects</h2>
         <div class="head-line"></div>
       </header>
-      <div class="project-card">
-        <div class="project-card-head">
-          <div>
-            <h3 class="project-name">PhishGuard <span class="badge badge--live">Live Demo</span></h3>
-            <p class="project-desc">Phishing URL detector that scores any link 0–100 across 30+ structural, domain, and reputation signals.</p>
-          </div>
-        </div>
-        <div class="project-tech">
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">TypeScript</span>
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">PostgreSQL</span>
-        </div>
-        <div class="full-scanner">
-          <div class="scan-bar">
-            <input type="text" id="demoScanInput" placeholder="Paste a URL to scan…" aria-label="URL to scan" />
-            <button type="button" id="demoScanBtn">SCAN</button>
-          </div>
-          <div id="demoScanResult"></div>
-          <div id="demoScanHistory" class="scan-history"></div>
-        </div>
-        <div class="project-links">
-          <a href="./phishing-detector/index.html" class="btn btn--primary btn--sm">Open full app</a>
-        </div>
-      </div>
+      <p class="section-lead">// Things I have built with my own hands. Each project below is a living tool — try it right here, no demos, no placeholders. Every component is written by me, one line at a time.</p>
 
-      <div class="project-card">
-        <div class="project-card-head">
-          <div>
-            <h3 class="project-name">PhoneTrace OSINT <span class="badge badge--progress">In Progress</span></h3>
-            <p class="project-desc">Privacy-conscious phone-number OSINT investigation tool that correlates publicly available information — number normalization, public web footprints, social media modules, username correlation, breach-notification exposure checks, and an evidence engine with confidence scoring and JSON/CSV/PDF report export.</p>
+      <div class="project-grid">
+        <!-- PhishGuard -->
+        <article class="project-card ref-card group">
+          <div class="ref-card-head">
+            <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <div>
+              <h3 class="project-name" style="font-size:18px;">PhishGuard <span class="badge badge--live" style="font-size:10px;vertical-align:middle;">Live Demo</span></h3>
+              <p class="skill-tag">Phishing URL detector — scores 0–100 across 30+ signals</p>
+            </div>
           </div>
-        </div>
-        <div class="project-tech">
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">TypeScript</span>
-          <span class="tech-tag">FastAPI</span>
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">SQLite</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/mandipolee/mandipolee" class="btn btn--outline btn--sm" target="_blank" rel="noopener">View on GitHub</a>
-        </div>
+          <ul class="ref-skills">
+            <li><span class="tri">&#9649;</span>Brand impersonation &amp; homoglyph detection</li>
+            <li><span class="tri">&#9649;</span>Typosquatting &amp; punycode analysis</li>
+            <li><span class="tri">&#9649;</span>Trusted-domain whitelist (zero false flags)</li>
+          </ul>
+          <div class="full-scanner">
+            <div class="scan-bar">
+              <input type="text" id="demoScanInput" placeholder="Paste a URL to scan…" aria-label="URL to scan" />
+              <button type="button" id="demoScanBtn">SCAN</button>
+            </div>
+            <div id="demoScanResult"></div>
+            <div id="demoScanHistory" class="scan-history"></div>
+            <a href="/phishing-detector/index.html" class="btn btn--primary btn--sm">Open full app</a>
+          </div>
+        </article>
+
+        <!-- PhoneTrace OSINT -->
+        <article class="project-card ref-card group">
+          <div class="ref-card-head">
+            <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+            <div>
+              <h3 class="project-name" style="font-size:18px;">PhoneTrace OSINT <span class="badge badge--progress" style="font-size:10px;vertical-align:middle;">In Progress</span></h3>
+              <p class="skill-tag">Privacy-safe phone-number OSINT investigator</p>
+            </div>
+          </div>
+          <ul class="ref-skills">
+            <li><span class="tri">&#9649;</span>Normalization, carrier &amp; validity engine</li>
+            <li><span class="tri">&#9649;</span>Public footprint + username correlation</li>
+            <li><span class="tri">&#9649;</span>Evidence engine &amp; JSON/CSV export</li>
+          </ul>
+          <!-- PhoneTrace live investigator -->
+          <div class="osint-investigator">
+            <div class="pt-bar">
+              <input type="text" id="ptNumberInput" placeholder="Enter phone number… e.g. +9779841234567" aria-label="Phone number to investigate" />
+              <input type="text" id="ptUsernameInput" placeholder="Username (optional)" aria-label="Username for correlation" />
+              <button type="button" id="ptScanBtn">INVESTIGATE</button>
+            </div>
+            <div id="ptResult"></div>
+            <div id="ptHistory" class="scan-history"></div>
+            <p class="pt-disclaimer">// OSINT correlation scores — NOT proof of identity. Verify manually via the links.</p>
+            <div class="project-links">
+              <a href="https://github.com/mandipolee/mandipolee" class="btn btn--outline btn--sm" target="_blank" rel="noopener">View on GitHub</a>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -411,7 +425,8 @@
     <p class="footer-copy mono">© 2026 Mandip Oli. All rights reserved.</p>
   </footer>
 
-  <script src="./phishing-detector/engine.js"></script>
-  <script src="script.js"></script>
+  <script src="/phishing-detector/engine.js"></script>
+  <script src="/phonetrace/engine.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>
